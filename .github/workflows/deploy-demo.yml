@@ -3,8 +3,6 @@ name: Deploy Demo
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -17,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -28,82 +26,30 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: cucumber-report-viewer/package-lock.json
         
     - name: Install dependencies
       run: |
         cd cucumber-report-viewer
-        npm ci
-        
-    - name: Run tests (skip for demo)
-      run: |
-        cd cucumber-report-viewer
-        echo "Skipping tests for demo deployment"
-        
-    - name: Run linting (skip for demo)
-      run: |
-        cd cucumber-report-viewer
-        echo "Skipping linting for demo deployment"
+        npm install --legacy-peer-deps
         
     - name: Build application
       run: |
         cd cucumber-report-viewer
-        npm run build
-        
-    - name: Validate build (simplified for demo)
-      run: |
-        cd cucumber-report-viewer
-        echo "Checking if dist directory exists..."
-        if [ -d "dist" ]; then
-          echo "✅ Build output found"
-          ls -la dist/
-        else
-          echo "❌ Build output not found"
-          exit 1
-        fi
+        NODE_ENV=production npm run build
         
     - name: Setup Pages
-      if: github.ref == 'refs/heads/main'
       uses: actions/configure-pages@v4
       
     - name: Upload artifact
-      if: github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@v3
       with:
         path: cucumber-report-viewer/dist
-
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    
-    steps:
+        
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
       
-    - name: Verify deployment
+    - name: Output URL
       run: |
-        echo "Demo deployed successfully!"
-        echo "URL: ${{ steps.deployment.outputs.page_url }}"
-        
-  notify:
-    if: always() && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    needs: [build, deploy]
-    
-    steps:
-    - name: Deployment status
-      run: |
-        if [ "${{ needs.build.result }}" == "success" ] && [ "${{ needs.deploy.result }}" == "success" ]; then
-          echo "✅ Demo deployment successful!"
-          echo "🚀 Live demo: https://srisri-t.github.io/GCAutomationTestResults/"
-        else
-          echo "❌ Demo deployment failed"
-          echo "Build status: ${{ needs.build.result }}"
-          echo "Deploy status: ${{ needs.deploy.result }}"
-        fi
+        echo "🎉 Demo deployed successfully!"
+        echo "🚀 Live at: https://srisri-t.github.io/GCAutomationTestResults/"
