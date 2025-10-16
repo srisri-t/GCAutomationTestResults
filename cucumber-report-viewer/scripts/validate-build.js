@@ -48,8 +48,8 @@ if (fs.existsSync(manifestPath)) {
       }
     }
     
-    // Check if start_url is correct for GitHub Pages
-    if (manifest.start_url && !manifest.start_url.includes('/TestResults/')) {
+    // Check if start_url is valid for GitHub Pages
+    if (manifest.start_url && !['/', '/GCAutomationTestResults/'].includes(manifest.start_url)) {
       console.error(`❌ Incorrect start_url in manifest: ${manifest.start_url}`);
       allValid = false;
     }
