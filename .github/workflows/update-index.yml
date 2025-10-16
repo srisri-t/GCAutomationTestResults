@@ -1,0 +1,228 @@
+name: Update Cucumber Reports Index
+
+permissions:
+  contents: write
+  actions: read
+
+on:
+  push:
+    paths:
+      - "cucumber-report-viewer/public/TestResultsJsons/*.json"
+      - "!cucumber-report-viewer/public/TestResultsJsons/index.json"
+      - "!cucumber-report-viewer/public/TestResultsJsons/stats.json"
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      validate_reports:
+        description: "Validate report structure"
+        required: false
+        default: true
+        type: boolean
+      generate_stats:
+        description: "Generate statistics"
+        required: false
+        default: true
+        type: boolean
+      organize_files:
+        description: "Organize and rename files"
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          cd cucumber-report-viewer/public/TestResultsJsons
+          npm init -y 2>/dev/null || true
+
+      - name: Fix report formats
+        run: |
+          cd cucumber-report-viewer
+          node scripts/fix-report-formats.js || echo "⚠️ Format fixer completed with warnings"
+
+      - name: Force index regeneration
+        run: |
+          cd cucumber-report-viewer/public/TestResultsJsons
+          echo "🔄 Forcing index regeneration to include all reports..."
+          # Remove existing index to force regeneration
+          rm -f index.json stats.json
+          echo "✅ Cleared existing index files"
+
+      - name: Cleanup deleted reports
+        run: |
+          cd cucumber-report-viewer/public/TestResultsJsons
+          if [ -f "../../src/utils/deletionUtils.js" ]; then
+            echo "🧹 Running cleanup for deleted reports..."
+            node -e "
+              const DeletionUtils = require('../../src/utils/deletionUtils.js');
+              const deletionUtils = new DeletionUtils();
+              
+              (async () => {
+                try {
+                  const deletedReports = await deletionUtils.getDeletedReports();
+                  console.log('Found', deletedReports.length, 'reports marked for deletion');
+                  
+                  for (const report of deletedReports) {
+                    if (report.needsCleanup) {
+                      const filePath = './' + report.filename;
+                      const fs = require('fs');
+                      if (fs.existsSync(filePath)) {
+                        fs.unlinkSync(filePath);
+                        console.log('Deleted:', report.filename);
+                      }
+                    }
+                  }
+                  
+                  // Clear the deleted reports list after cleanup
+                  await deletionUtils.saveDeletedReports([]);
+                  console.log('✅ Cleanup completed');
+                } catch (error) {
+                  console.log('⚠️ Cleanup failed:', error.message);
+                  // Don't fail the workflow if cleanup fails
+                }
+              })();
+            "
+          else
+            echo "⚠️ Deletion utils not found, skipping cleanup"
+          fi
+
+      - name: Generate enhanced index.json
+        run: |
+          cd cucumber-report-viewer/public/TestResultsJsons
+          node generate-index-enhanced.js --verbose
+        env:
+          VALIDATE_REPORTS: ${{ github.event.inputs.validate_reports || 'true' }}
+          GENERATE_STATS: ${{ github.event.inputs.generate_stats || 'true' }}
+
+      - name: Validate generated files
+        run: |
+          cd cucumber-report-viewer/public/TestResultsJsons
+          if [ ! -f "index.json" ]; then
+            echo "❌ index.json was not generated"
+            exit 1
+          fi
+
+          # Validate JSON syntax
+          if ! jq empty index.json; then
+            echo "❌ index.json has invalid JSON syntax"
+            exit 1
+          fi
+
+          # Check if cleanup was successful
+          if [ -f ".deleted-reports.json" ]; then
+            DELETED_COUNT=$(jq -r 'length' .deleted-reports.json 2>/dev/null || echo "0")
+            echo "📊 Deleted reports tracking: $DELETED_COUNT entries"
+          fi
+
+          echo "✅ Generated files are valid"
+
+      - name: Create summary report
+        run: |
+          cd cucumber-report-viewer/public/TestResultsJsons
+          echo "## 📊 Cucumber Reports Index Update" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "stats.json" ]; then
+            TOTAL_REPORTS=$(jq -r '.totalReports' stats.json)
+            PASS_RATE=$(jq -r '.passRate' stats.json)
+            TOTAL_SCENARIOS=$(jq -r '.totalScenarios' stats.json)
+            
+            echo "- **Total Reports**: $TOTAL_REPORTS" >> $GITHUB_STEP_SUMMARY
+            echo "- **Total Scenarios**: $TOTAL_SCENARIOS" >> $GITHUB_STEP_SUMMARY
+            echo "- **Pass Rate**: $PASS_RATE%" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          REPORT_COUNT=$(jq -r '.reports | length' index.json)
+          echo "- **Index Updated**: $REPORT_COUNT reports processed" >> $GITHUB_STEP_SUMMARY
+
+          # Add cleanup information
+          if [ -f ".deleted-reports.json" ]; then
+            DELETED_COUNT=$(jq -r 'length' .deleted-reports.json 2>/dev/null || echo "0")
+            if [ "$DELETED_COUNT" -gt "0" ]; then
+              echo "- **🧹 Cleanup**: $DELETED_COUNT deleted reports tracked" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "- **🧹 Cleanup**: No reports pending deletion" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+      - name: Commit and push changes
+        run: |
+          cd cucumber-report-viewer/public/TestResultsJsons
+          
+          # Configure git
+          git config --local user.email "cucumber-bot@github.com"
+          git config --local user.name "Cucumber Bot"
+          
+          # Check if there are changes to commit
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          
+          # Add all relevant files
+          git add index.json stats.json .deleted-reports.json *.json
+          
+          # Show what we're committing
+          echo "Files to commit:"
+          git diff --staged --name-only
+          
+          # Commit changes
+          git commit -m "🤖 Auto-update Cucumber reports index and statistics
+          
+          - Updated index.json with latest reports
+          - Refreshed statistics
+          - Processed report cleanup
+          
+          [skip ci]"
+          
+          # Push changes
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create deployment comment
+        if: github.event_name == 'push'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = 'cucumber-report-viewer/public/TestResultsJsons/stats.json';
+
+            if (fs.existsSync(path)) {
+              const stats = JSON.parse(fs.readFileSync(path, 'utf8'));
+              
+              const comment = `## 🥒 Cucumber Reports Updated
+              
+              **Summary:**
+              - 📊 **${stats.totalReports}** reports processed
+              - 🧪 **${stats.totalScenarios}** scenarios
+              - ✅ **${stats.passRate}%** pass rate
+              - ⏱️ **${stats.averageDuration}s** average duration
+              
+              **Latest Report:** ${stats.newestReport?.name || 'N/A'}
+              
+              [View Reports](https://your-domain.com/cucumber-reports)`;
+              
+              github.rest.repos.createCommitComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: context.sha,
+                body: comment
+              });
+            }

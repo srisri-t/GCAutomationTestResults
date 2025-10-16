@@ -1,0 +1,445 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "Homepage loads within acceptable time",
+        "description": "",
+        "id": "page-load-performance;homepage-loads-within-acceptable-time",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2800000000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I navigate to the homepage",
+            "match": {
+              "location": "PerformanceSteps.navigateToHomepage()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1200000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "the page should load within 3 seconds",
+            "match": {
+              "location": "PerformanceSteps.verifyPageLoadTime(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 800000000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "all critical resources should be loaded",
+            "match": {
+              "location": "PerformanceSteps.verifyCriticalResourcesLoaded()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 2,
+            "name": "@performance"
+          },
+          {
+            "line": 2,
+            "name": "@load-time"
+          },
+          {
+            "line": 2,
+            "name": "@critical"
+          }
+        ]
+      },
+      {
+        "line": 8,
+        "name": "Search results load quickly",
+        "description": "",
+        "id": "page-load-performance;search-results-load-quickly",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1500000000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I am on the search page",
+            "match": {
+              "location": "PerformanceSteps.onSearchPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4200000000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I enter a search term and submit",
+            "match": {
+              "location": "PerformanceSteps.enterSearchTermAndSubmit()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 950000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "the search results should appear within 2 seconds",
+            "match": {
+              "location": "PerformanceSteps.verifySearchResultsTime(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 650000000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "at least 10 results should be displayed",
+            "match": {
+              "location": "PerformanceSteps.verifyMinimumResults(int)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 7,
+            "name": "@performance"
+          },
+          {
+            "line": 7,
+            "name": "@search"
+          },
+          {
+            "line": 7,
+            "name": "@response-time"
+          }
+        ]
+      },
+      {
+        "line": 14,
+        "name": "Large dataset pagination performs well",
+        "description": "",
+        "id": "page-load-performance;large-dataset-pagination-performs-well",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3200000000,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "I am viewing a large dataset with 1000+ items",
+            "match": {
+              "location": "PerformanceSteps.viewingLargeDataset()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2800000000,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "I click on page 5 of the results",
+            "match": {
+              "location": "PerformanceSteps.clickPaginationPage(int)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1100000000,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "the new page should load within 1.5 seconds",
+            "match": {
+              "location": "PerformanceSteps.verifyPaginationLoadTime(double)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 750000000,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "the page should display the correct items",
+            "match": {
+              "location": "PerformanceSteps.verifyCorrectPaginationItems()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 13,
+            "name": "@performance"
+          },
+          {
+            "line": 13,
+            "name": "@pagination"
+          },
+          {
+            "line": 13,
+            "name": "@large-dataset"
+          }
+        ]
+      }
+    ],
+    "name": "Page Load Performance",
+    "description": "Testing page load times and response performance",
+    "id": "page-load-performance",
+    "keyword": "Feature",
+    "uri": "features/performance/page-load.feature",
+    "tags": []
+  },
+  {
+    "line": 21,
+    "elements": [
+      {
+        "line": 23,
+        "name": "System handles 100 concurrent users",
+        "description": "",
+        "id": "load-testing;system-handles-100-concurrent-users",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 15000000000,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "the system is under normal load",
+            "match": {
+              "location": "LoadTestSteps.systemUnderNormalLoad()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 45000000000,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "I simulate 100 concurrent users",
+            "match": {
+              "location": "LoadTestSteps.simulateConcurrentUsers(int)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 8000000000,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "the average response time should be under 2 seconds",
+            "match": {
+              "location": "LoadTestSteps.verifyAverageResponseTime(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 3000000000,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "the error rate should be less than 1%",
+            "match": {
+              "location": "LoadTestSteps.verifyErrorRate(double)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 22,
+            "name": "@performance"
+          },
+          {
+            "line": 22,
+            "name": "@load-test"
+          },
+          {
+            "line": 22,
+            "name": "@concurrent-users"
+          }
+        ]
+      },
+      {
+        "line": 29,
+        "name": "Database queries perform within limits",
+        "description": "",
+        "id": "load-testing;database-queries-perform-within-limits",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 5500000000,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "the database contains 10,000 test records",
+            "match": {
+              "location": "LoadTestSteps.databaseContainsRecords(int)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 12000000000,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "I execute complex search queries",
+            "match": {
+              "location": "LoadTestSteps.executeComplexSearchQueries()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2200000000,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "each query should complete within 500ms",
+            "match": {
+              "location": "LoadTestSteps.verifyQueryExecutionTime(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1800000000,
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "the results should be accurate",
+            "match": {
+              "location": "LoadTestSteps.verifyQueryResultAccuracy()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 28,
+            "name": "@performance"
+          },
+          {
+            "line": 28,
+            "name": "@database"
+          },
+          {
+            "line": 28,
+            "name": "@query-performance"
+          }
+        ]
+      },
+      {
+        "line": 35,
+        "name": "Memory usage stays within acceptable limits",
+        "description": "",
+        "id": "load-testing;memory-usage-stays-within-acceptable-limits",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 8000000000,
+              "status": "passed"
+            },
+            "line": 36,
+            "name": "the application is running with baseline memory usage",
+            "match": {
+              "location": "LoadTestSteps.applicationRunningWithBaselineMemory()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 25000000000,
+              "status": "passed"
+            },
+            "line": 37,
+            "name": "I perform memory-intensive operations for 5 minutes",
+            "match": {
+              "location": "LoadTestSteps.performMemoryIntensiveOperations(int)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3500000000,
+              "status": "failed",
+              "error_message": "Memory usage exceeded limit: 2.1GB used, maximum allowed: 2.0GB"
+            },
+            "line": 38,
+            "name": "memory usage should not exceed 2GB",
+            "match": {
+              "location": "LoadTestSteps.verifyMemoryUsageLimit(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 0,
+              "status": "skipped"
+            },
+            "line": 39,
+            "name": "there should be no memory leaks detected",
+            "match": {
+              "location": "LoadTestSteps.verifyNoMemoryLeaks()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 34,
+            "name": "@performance"
+          },
+          {
+            "line": 34,
+            "name": "@memory"
+          },
+          {
+            "line": 34,
+            "name": "@resource-usage"
+          }
+        ]
+      }
+    ],
+    "name": "Load Testing and Resource Usage",
+    "description": "Testing system performance under various load conditions",
+    "id": "load-testing",
+    "keyword": "Feature",
+    "uri": "features/performance/load-testing.feature",
+    "tags": []
+  }
+]

@@ -1,0 +1,445 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "App launches successfully on iOS",
+        "description": "",
+        "id": "mobile-app-launch;app-launches-successfully-on-ios",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 8500000000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I have the app installed on iOS device",
+            "match": {
+              "location": "MobileSteps.appInstalledOnIOS()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 12000000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I tap the app icon",
+            "match": {
+              "location": "MobileSteps.tapAppIcon()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3200000000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "the app should launch within 10 seconds",
+            "match": {
+              "location": "MobileSteps.verifyAppLaunchTime(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2800000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I should see the main screen",
+            "match": {
+              "location": "MobileSteps.verifyMainScreen()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 2,
+            "name": "@mobile"
+          },
+          {
+            "line": 2,
+            "name": "@ios"
+          },
+          {
+            "line": 2,
+            "name": "@smoke"
+          }
+        ]
+      },
+      {
+        "line": 9,
+        "name": "App launches successfully on Android",
+        "description": "",
+        "id": "mobile-app-launch;app-launches-successfully-on-android",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 7200000000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I have the app installed on Android device",
+            "match": {
+              "location": "MobileSteps.appInstalledOnAndroid()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 9800000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I tap the app icon",
+            "match": {
+              "location": "MobileSteps.tapAppIcon()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2900000000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "the app should launch within 10 seconds",
+            "match": {
+              "location": "MobileSteps.verifyAppLaunchTime(int)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2400000000,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "I should see the main screen",
+            "match": {
+              "location": "MobileSteps.verifyMainScreen()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 8,
+            "name": "@mobile"
+          },
+          {
+            "line": 8,
+            "name": "@android"
+          },
+          {
+            "line": 8,
+            "name": "@smoke"
+          }
+        ]
+      },
+      {
+        "line": 15,
+        "name": "App handles network connectivity issues",
+        "description": "",
+        "id": "mobile-app-launch;app-handles-network-connectivity-issues",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 5500000000,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "the app is running",
+            "match": {
+              "location": "MobileSteps.appIsRunning()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2100000000,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "I disable network connectivity",
+            "match": {
+              "location": "MobileSteps.disableNetworkConnectivity()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 4800000000,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "I try to perform a network operation",
+            "match": {
+              "location": "MobileSteps.performNetworkOperation()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3200000000,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "I should see an appropriate offline message",
+            "match": {
+              "location": "MobileSteps.verifyOfflineMessage()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 14,
+            "name": "@mobile"
+          },
+          {
+            "line": 14,
+            "name": "@network"
+          },
+          {
+            "line": 14,
+            "name": "@error-handling"
+          }
+        ]
+      }
+    ],
+    "name": "Mobile App Launch and Connectivity",
+    "description": "Testing mobile app launch performance and network handling",
+    "id": "mobile-app-launch",
+    "keyword": "Feature",
+    "uri": "features/mobile/app-launch.feature",
+    "tags": []
+  },
+  {
+    "line": 22,
+    "elements": [
+      {
+        "line": 24,
+        "name": "User can navigate through main sections",
+        "description": "",
+        "id": "mobile-navigation;user-can-navigate-through-main-sections",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 4200000000,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "I am on the main screen",
+            "match": {
+              "location": "MobileSteps.onMainScreen()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2800000000,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "I tap on the menu button",
+            "match": {
+              "location": "MobileSteps.tapMenuButton()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1900000000,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "I should see the navigation menu",
+            "match": {
+              "location": "MobileSteps.verifyNavigationMenu()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 3100000000,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "I can navigate to different sections",
+            "match": {
+              "location": "MobileSteps.navigateToDifferentSections()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 23,
+            "name": "@mobile"
+          },
+          {
+            "line": 23,
+            "name": "@navigation"
+          },
+          {
+            "line": 23,
+            "name": "@ui"
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "name": "Swipe gestures work correctly",
+        "description": "",
+        "id": "mobile-navigation;swipe-gestures-work-correctly",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3800000000,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "I am viewing a scrollable list",
+            "match": {
+              "location": "MobileSteps.viewingScrollableList()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2200000000,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "I swipe up on the screen",
+            "match": {
+              "location": "MobileSteps.swipeUp()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1800000000,
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "the list should scroll down",
+            "match": {
+              "location": "MobileSteps.verifyListScrollsDown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2400000000,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "I should see new content",
+            "match": {
+              "location": "MobileSteps.verifyNewContent()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 29,
+            "name": "@mobile"
+          },
+          {
+            "line": 29,
+            "name": "@gestures"
+          },
+          {
+            "line": 29,
+            "name": "@ui"
+          }
+        ]
+      },
+      {
+        "line": 36,
+        "name": "Back button navigation works",
+        "description": "",
+        "id": "mobile-navigation;back-button-navigation-works",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3500000000,
+              "status": "passed"
+            },
+            "line": 37,
+            "name": "I am on a detail screen",
+            "match": {
+              "location": "MobileSteps.onDetailScreen()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1600000000,
+              "status": "failed",
+              "error_message": "Back button not found. UI element may have changed or device-specific issue."
+            },
+            "line": 38,
+            "name": "I tap the back button",
+            "match": {
+              "location": "MobileSteps.tapBackButton()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 0,
+              "status": "skipped"
+            },
+            "line": 39,
+            "name": "I should return to the previous screen",
+            "match": {
+              "location": "MobileSteps.verifyPreviousScreen()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 35,
+            "name": "@mobile"
+          },
+          {
+            "line": 35,
+            "name": "@navigation"
+          },
+          {
+            "line": 35,
+            "name": "@critical"
+          }
+        ]
+      }
+    ],
+    "name": "Mobile Navigation and Gestures",
+    "description": "Testing mobile-specific navigation patterns and touch gestures",
+    "id": "mobile-navigation",
+    "keyword": "Feature",
+    "uri": "features/mobile/navigation.feature",
+    "tags": []
+  }
+]

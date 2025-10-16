@@ -1,0 +1,62 @@
+[
+  {
+    "name": "E-Commerce Platform Tests",
+    "filename": "ecommerce-platform-tests.json",
+    "timestamp": "2025-01-16T10:30:00Z",
+    "size": 15420,
+    "description": "Complete user journey testing for e-commerce platform including authentication and shopping cart functionality",
+    "features": 2,
+    "scenarios": 5,
+    "passed": 4,
+    "failed": 1,
+    "skipped": 0,
+    "duration": "00:00:32",
+    "environment": "Production",
+    "tags": ["@authentication", "@shopping", "@smoke", "@critical", "@negative", "@payment"]
+  },
+  {
+    "name": "API Integration Tests",
+    "filename": "api-integration-tests.json",
+    "timestamp": "2025-01-16T09:15:00Z",
+    "size": 12850,
+    "description": "REST API endpoint validation including authentication, CRUD operations, and error handling",
+    "features": 2,
+    "scenarios": 6,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 1,
+    "duration": "00:00:18",
+    "environment": "Staging",
+    "tags": ["@api", "@smoke", "@crud", "@error-handling", "@security", "@critical", "@negative"]
+  },
+  {
+    "name": "Mobile App Tests",
+    "filename": "mobile-app-tests.json",
+    "timestamp": "2025-01-16T08:45:00Z",
+    "size": 18200,
+    "description": "Cross-platform mobile testing including app launch, navigation, and gesture handling",
+    "features": 2,
+    "scenarios": 6,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 1,
+    "duration": "00:01:45",
+    "environment": "Mobile Testing",
+    "tags": ["@mobile", "@ios", "@android", "@smoke", "@network", "@error-handling", "@navigation", "@ui", "@gestures", "@critical"]
+  },
+  {
+    "name": "Performance Tests",
+    "filename": "performance-tests.json",
+    "timestamp": "2025-01-16T07:20:00Z",
+    "size": 16750,
+    "description": "Performance and load testing including page load times, concurrent users, and resource usage",
+    "features": 2,
+    "scenarios": 6,
+    "passed": 5,
+    "failed": 1,
+    "skipped": 1,
+    "duration": "00:02:15",
+    "environment": "Performance Lab",
+    "tags": ["@performance", "@load-time", "@critical", "@search", "@response-time", "@pagination", "@large-dataset", "@load-test", "@concurrent-users", "@database", "@query-performance", "@memory", "@resource-usage"]
+  }
+]

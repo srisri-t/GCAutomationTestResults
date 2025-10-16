@@ -1,0 +1,333 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "User can register with valid credentials",
+        "description": "",
+        "id": "user-authentication;user-can-register-with-valid-credentials",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2500000000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I navigate to the registration page",
+            "match": {
+              "location": "AuthenticationSteps.navigateToRegistration()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1800000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I enter valid user details",
+            "match": {
+              "location": "AuthenticationSteps.enterValidUserDetails()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3200000000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I should see a successful registration message",
+            "match": {
+              "location": "AuthenticationSteps.verifyRegistrationSuccess()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 2,
+            "name": "@authentication"
+          },
+          {
+            "line": 2,
+            "name": "@smoke"
+          }
+        ]
+      },
+      {
+        "line": 8,
+        "name": "User can login with valid credentials",
+        "description": "",
+        "id": "user-authentication;user-can-login-with-valid-credentials",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1500000000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I am on the login page",
+            "match": {
+              "location": "AuthenticationSteps.navigateToLogin()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2100000000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I enter valid login credentials",
+            "match": {
+              "location": "AuthenticationSteps.enterValidCredentials()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2800000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I should be redirected to the dashboard",
+            "match": {
+              "location": "AuthenticationSteps.verifyDashboardRedirect()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 7,
+            "name": "@authentication"
+          },
+          {
+            "line": 7,
+            "name": "@critical"
+          }
+        ]
+      },
+      {
+        "line": 13,
+        "name": "User cannot login with invalid credentials",
+        "description": "",
+        "id": "user-authentication;user-cannot-login-with-invalid-credentials",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1200000000,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "I am on the login page",
+            "match": {
+              "location": "AuthenticationSteps.navigateToLogin()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1800000000,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "I enter invalid login credentials",
+            "match": {
+              "location": "AuthenticationSteps.enterInvalidCredentials()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2200000000,
+              "status": "failed",
+              "error_message": "Expected error message 'Invalid credentials' but got 'Login failed'"
+            },
+            "line": 16,
+            "name": "I should see an error message",
+            "match": {
+              "location": "AuthenticationSteps.verifyErrorMessage()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 12,
+            "name": "@authentication"
+          },
+          {
+            "line": 12,
+            "name": "@negative"
+          }
+        ]
+      }
+    ],
+    "name": "User Authentication",
+    "description": "As a user, I want to be able to register and login to access the platform",
+    "id": "user-authentication",
+    "keyword": "Feature",
+    "uri": "features/authentication.feature",
+    "tags": []
+  },
+  {
+    "line": 20,
+    "elements": [
+      {
+        "line": 22,
+        "name": "User can add items to shopping cart",
+        "description": "",
+        "id": "shopping-cart;user-can-add-items-to-shopping-cart",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3500000000,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "I am logged in as a customer",
+            "match": {
+              "location": "ShoppingSteps.loginAsCustomer()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2800000000,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "I browse to a product page",
+            "match": {
+              "location": "ShoppingSteps.browseToProduct()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1900000000,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "I click add to cart",
+            "match": {
+              "location": "ShoppingSteps.addToCart()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2400000000,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "the item should be added to my cart",
+            "match": {
+              "location": "ShoppingSteps.verifyItemInCart()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 21,
+            "name": "@shopping"
+          },
+          {
+            "line": 21,
+            "name": "@smoke"
+          }
+        ]
+      },
+      {
+        "line": 28,
+        "name": "User can complete checkout process",
+        "description": "",
+        "id": "shopping-cart;user-can-complete-checkout-process",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2100000000,
+              "status": "passed"
+            },
+            "line": 29,
+            "name": "I have items in my shopping cart",
+            "match": {
+              "location": "ShoppingSteps.haveItemsInCart()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4200000000,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "I proceed to checkout",
+            "match": {
+              "location": "ShoppingSteps.proceedToCheckout()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3800000000,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "I enter payment information",
+            "match": {
+              "location": "ShoppingSteps.enterPaymentInfo()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5500000000,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "I should see order confirmation",
+            "match": {
+              "location": "ShoppingSteps.verifyOrderConfirmation()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 27,
+            "name": "@shopping"
+          },
+          {
+            "line": 27,
+            "name": "@critical"
+          },
+          {
+            "line": 27,
+            "name": "@payment"
+          }
+        ]
+      }
+    ],
+    "name": "Shopping Cart Management",
+    "description": "As a customer, I want to manage items in my shopping cart and complete purchases",
+    "id": "shopping-cart",
+    "keyword": "Feature",
+    "uri": "features/shopping-cart.feature",
+    "tags": []
+  }
+]

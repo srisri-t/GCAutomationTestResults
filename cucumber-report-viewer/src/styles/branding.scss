@@ -1,0 +1,245 @@
+// Professional branding styles for demo
+:root {
+  // Demo brand colors
+  --demo-primary: #4CAF50;
+  --demo-primary-dark: #388E3C;
+  --demo-primary-light: #81C784;
+  --demo-secondary: #2196F3;
+  --demo-accent: #FF9800;
+  --demo-success: #4CAF50;
+  --demo-warning: #FF9800;
+  --demo-error: #F44336;
+  --demo-info: #2196F3;
+  
+  // Professional gradients
+  --demo-gradient-primary: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
+  --demo-gradient-secondary: linear-gradient(135deg, #2196F3 0%, #64B5F6 100%);
+  --demo-gradient-hero: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  
+  // Shadows
+  --demo-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --demo-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --demo-shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+// Professional logo styling
+.demo-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--demo-primary);
+  text-decoration: none;
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: var(--demo-gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .logo-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: var(--demo-gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  &:hover {
+    .logo-icon {
+      transform: scale(1.05);
+      transition: transform 0.2s ease;
+    }
+  }
+}
+
+// Professional card styling
+.demo-card {
+  border-radius: 12px !important;
+  box-shadow: var(--demo-shadow-light) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease !important;
+  
+  &:hover {
+    box-shadow: var(--demo-shadow-medium) !important;
+    transform: translateY(-2px);
+  }
+  
+  .v-card-title {
+    font-weight: 600 !important;
+    color: var(--demo-primary) !important;
+  }
+}
+
+// Professional buttons
+.demo-btn-primary {
+  background: var(--demo-gradient-primary) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: var(--demo-shadow-light) !important;
+  
+  &:hover {
+    box-shadow: var(--demo-shadow-medium) !important;
+    transform: translateY(-1px);
+  }
+}
+
+.demo-btn-secondary {
+  background: var(--demo-gradient-secondary) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: var(--demo-shadow-light) !important;
+  
+  &:hover {
+    box-shadow: var(--demo-shadow-medium) !important;
+    transform: translateY(-1px);
+  }
+}
+
+// Hero section styling
+.demo-hero {
+  background: var(--demo-gradient-hero);
+  color: white;
+  padding: 48px 24px;
+  text-align: center;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 24px;
+  }
+  
+  .hero-cta {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 8px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Status indicators
+.demo-status {
+  &.success {
+    background: var(--demo-success);
+    color: white;
+  }
+  
+  &.warning {
+    background: var(--demo-warning);
+    color: white;
+  }
+  
+  &.error {
+    background: var(--demo-error);
+    color: white;
+  }
+  
+  &.info {
+    background: var(--demo-info);
+    color: white;
+  }
+}
+
+// Professional metrics display
+.demo-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+  
+  .metric-card {
+    @extend .demo-card;
+    padding: 24px;
+    text-align: center;
+    
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--demo-primary);
+      margin-bottom: 8px;
+    }
+    
+    .metric-label {
+      font-size: 0.875rem;
+      color: var(--v-theme-on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// Loading states
+.demo-loading {
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+  }
+  
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+// Dark theme adjustments
+[data-theme="dark"] {
+  --demo-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --demo-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --demo-shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.5);
+  
+  .demo-card {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  
+  .demo-loading .skeleton {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+  }
+}
+
+// Print styles
+@media print {
+  .demo-hero,
+  .demo-btn-primary,
+  .demo-btn-secondary {
+    background: none !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  .demo-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}
